@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Điểm danh</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    body {
+      background: #f1e7ff;
+    }
+    .form-box {
+      background: white;
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      border-top: 8px solid #673ab7;
+    }
+    .submit-btn {
+      background: #673ab7;
+      border: none;
+      font-weight: 600;
+    }
+    .submit-btn:disabled {
+      opacity: .5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box shadow-sm" style="width: 30%;">
+
+      <h4 class="mb-4 fw-bold text-center">Điểm danh sinh viên</h4>
+
+
+      <form id="attendanceForm">
+
+        <!-- Họ và tên -->
+        <div class="mb-4">
+         <label class="form-label fw-semibold">Họ và tên <span class="text-danger">*</span></label>
+         <input type="text" class="form-control" id="fullname" placeholder="Câu trả lời của bạn" required>
+        </div>
+        <!-- Lớp -->
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Lớp <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="class"  placeholder="Câu trả lời của bạn" required>
+        </div>
+
+        <!-- MSSV -->
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Mã số sinh viên <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="studentId"  placeholder="Câu trả lời của bạn" required>
+        </div>
+
+        <!-- Đơn vị -->
+        <div class="mb-4">
+          <label class="form-label fw-semibold">Đơn vị <span class="text-danger">*</span></label>
+
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="radio" name="donvi" value="Trường Khoa học xã hội và Nhân văn" required>
+            <label class="form-check-label">Trường Khoa học xã hội và Nhân văn</label>
+          </div>
+
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="radio" name="donvi" value="Trường Sư phạm">
+            <label class="form-check-label">Trường Sư phạm</label>
+          </div>
+
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="radio" name="donvi" value="Trường Kinh tế">
+            <label class="form-check-label">Trường Kinh tế</label>
+          </div>
+
+          <div class="form-check mt-1">
+            <input class="form-check-input" type="radio" name="donvi" value="Viện Kỹ thuật và công nghệ">
+            <label class="form-check-label">Viện Kỹ thuật và công nghệ</label>
+          </div>
+
+        </div>
+
+        <!-- Nút gửi -->
+        <button class="btn btn-primary submit-btn w-100" id="submitBtn" disabled>
+          Điểm danh
+        </button>
+
+      </form>
+  </div>
+
+
+<script>
+  const inputs = document.querySelectorAll("input");
+  const submitBtn = document.getElementById("submitBtn");
+
+  function validateForm() {
+    let valid = true;
+    inputs.forEach(i => {
+      if (i.type === "radio") {
+        if (!document.querySelector('input[name="donvi"]:checked')) valid = false;
+      } else {
+        if (!i.value.trim()) valid = false;
+      }
+    });
+
+    submitBtn.disabled = !valid;
+  }
+
+  inputs.forEach(i => i.addEventListener("input", validateForm));
+
+  document.getElementById("attendanceForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    window.location.href = "video.html";
+  });
+</script>
+
+</body>
+</html>
